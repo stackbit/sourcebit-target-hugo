@@ -1,0 +1,47 @@
+{
+  "name": "sourcebit-target-hugo",
+  "version": "0.1.0",
+  "description": "A Sourcebit plugin for Hugo",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run format",
+    "format": "prettier --write \"./**/*.{js,jsx,md,html}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackbithq/sourcebit-target-hugo.git"
+  },
+  "keywords": [
+    "headless",
+    "headless-cms",
+    "jamstack",
+    "ssg",
+    "jekyll"
+  ],
+  "author": "Stackbit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stackbithq/sourcebit-target-hugo/issues"
+  },
+  "homepage": "https://github.com/stackbithq/sourcebit-target-hugo#readme",
+  "dependencies": {
+    "@sindresorhus/slugify": "^0.9.1",
+    "inquirer-table-prompt": "^0.2.1"
+  },
+  "devDependencies": {
+    "husky": "^4.2.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,md,html}": [
+      "npm run format",
+      "git add"
+    ]
+  }
+}
