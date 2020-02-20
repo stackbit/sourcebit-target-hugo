@@ -86,9 +86,14 @@ module.exports.getOptionsFromSetup = ({ answers, debug }) => {
       page.layoutSource ? "layout" : null,
       "...frontmatterFields"
     ];
+    const conditionParts = [
+      modelName && `modelName === '${modelName}'`,
+      projectId && `projectId === '${projectId}'`,
+      source && `source === '${source}'`
+    ].filter(Boolean);
 
     conditions.push(
-      `if (modelName === '${modelName}' && projectId === '${projectId}' && source === '${source}') {`,
+      `if (${conditionParts.join(" && ")}) {`,
       `  const { ${extractedProperties.filter(Boolean).join(", ")} } = entry;`,
       ``,
       `  return {`,
