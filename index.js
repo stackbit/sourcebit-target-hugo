@@ -58,15 +58,11 @@ module.exports.getOptionsFromSetup = ({ answers, debug }) => {
     if (page.location.fileName) {
       location = `'${page.location.fileName}'`;
     } else {
-      const { directory, fileNameField, useDate } = page.location;
+      const { directory, fileNameField } = page.location;
       const locationParts = [];
 
       if (directory) {
         locationParts.push(`'${directory}/'`);
-      }
-
-      if (useDate) {
-        locationParts.push(`createdAt.substring(0, 10) + '-'`);
       }
 
       locationParts.push(`utils.slugify(fields['${fileNameField}']) + '.md'`);
@@ -81,7 +77,7 @@ module.exports.getOptionsFromSetup = ({ answers, debug }) => {
         ? `'${page.layout}'`
         : `fields['${page.layout}']`;
     const extractedProperties = [
-      "__metadata",
+      "__metadata = {}",
       page.contentField ? `'${page.contentField}': content` : null,
       page.layoutSource ? "layout" : null,
       "...frontmatterFields"
@@ -91,11 +87,19 @@ module.exports.getOptionsFromSetup = ({ answers, debug }) => {
       projectId && `projectId === '${projectId}'`,
       source && `source === '${source}'`
     ].filter(Boolean);
+    let addDate = "";
+
+    if (page.addDateField) {
+      addDate = `
+  if (typeof entry.__metadata.createdAt === 'string') {
+    frontmatterFields.date = entry.__metadata.createdAt.split('T')[0]
+  }\n`;
+    }
 
     conditions.push(
       `if (${conditionParts.join(" && ")}) {`,
       `  const { ${extractedProperties.filter(Boolean).join(", ")} } = entry;`,
-      ``,
+      addDate,
       `  return {`,
       `    content: {`,
       `      body: ${contentField},`,
