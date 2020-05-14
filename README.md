@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/sourcebit-target-hugo.svg)](https://badge.fury.io/js/sourcebit-target-hugo)
 
-> A Sourcebit plugin for the [Hugo](https://gohugo.io/) static site generator
+> A [Sourcebit](https://github.com/stackbithq/sourcebit) plugin for the [Hugo](https://gohugo.io/) static site generator
 
 ## 👩‍🏫 Introduction
 
