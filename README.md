@@ -6,7 +6,7 @@
 
 ## 👩‍🏫 Introduction
 
-This plugin writes content from any Sourcebit data source into files compatible with the Jekyll static site generator.
+This plugin writes content from any Sourcebit data source into files compatible with the Hugo static site generator.
 
 ## 🏗 Installation
 
